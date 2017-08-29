@@ -46,7 +46,7 @@ var (
 )
 
 func main() {
-	kubeprune("rt")
+	kubeprune("deploy")
 	// dependencies()
 	// pdeploy()
 }
@@ -105,10 +105,10 @@ func kubeprune(kubestring string) (kubereturn string) {
 		kubereturn := gjson.Get(templateJSONdata, "globalBranchOverride")
 		fmt.Println(kubereturn)
 	case kubestring == "deploy":
-		kubereturn := gjson.Get(templateJSONdata, "deploy")
+		kubereturn := gjson.Get(templateJSONdata, "deploy.0").Array()
 		fmt.Println(kubereturn)
 	case kubestring == "exclude":
-		kubereturn := gjson.Get(templateJSONdata, "exclude")
+		kubereturn := gjson.Get(templateJSONdata, "exclude").Array()
 		fmt.Println(kubereturn)
 	}
 	return kubereturn
