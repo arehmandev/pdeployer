@@ -5,6 +5,27 @@ import (
 	"testing"
 )
 
+func TestKubefunctionsdebug(t *testing.T) {
+	cases := []struct {
+		name string
+		want string
+	}{
+		{
+			name: "Kube Debug function",
+			want: "pdeploy is currently using these settings",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			got := debug()
+			if !reflect.DeepEqual(got, c.want) {
+				t.Errorf("got: %#v\nwant: %#v\n", got, c.want)
+			}
+		})
+	}
+}
+
 func TestKubePrune(t *testing.T) {
 	cases := []struct {
 		name  string
@@ -61,6 +82,34 @@ func TestKubePrune(t *testing.T) {
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
 			got := kubeprune(c.input)
+			if !reflect.DeepEqual(got, c.want) {
+				t.Errorf("got: %#v\nwant: %#v\n", got, c.want)
+			}
+		})
+	}
+}
+
+func TestKubecontext(t *testing.T) {
+	cases := []struct {
+		name  string
+		input string
+		want  string
+	}{
+		{
+			name:  "Kube context flag test",
+			input: "",
+			want:  "The current context is kube",
+		},
+		{
+			name:  "Kube context flag test",
+			input: "testcontext",
+			want:  "The current context is testcontext",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			got := context(c.input)
 			if !reflect.DeepEqual(got, c.want) {
 				t.Errorf("got: %#v\nwant: %#v\n", got, c.want)
 			}

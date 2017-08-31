@@ -62,23 +62,28 @@ func pdeploy() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "sleep",
-			Value: "0",
-			Usage: "Specifies sleep duration, defaults to 0",
+			Value: "15",
+			Usage: "Specifies sleep duration",
 		},
 		cli.StringFlag{
 			Name:  "phold",
-			Value: "0",
-			Usage: "Specifies phold duration, defaults to 0",
+			Value: "5",
+			Usage: "Specifies phold duration",
 		},
 		cli.StringFlag{
 			Name:  "namespace",
 			Value: "system",
-			Usage: "Kube namespace - defaults to system",
+			Usage: "Kube namespace",
 		},
 		cli.StringFlag{
-			Name:  "",
-			Value: "0",
-			Usage: "Specifies phold duration, defaults to 0",
+			Name:  "environment",
+			Value: "autosit",
+			Usage: "Specifies environment",
+		},
+		cli.StringFlag{
+			Name:  "context",
+			Value: "ipt-context",
+			Usage: "Specifies context",
 		},
 	}
 

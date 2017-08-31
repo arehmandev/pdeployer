@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"os/exec"
+	"syscall"
+)
 
 func publish() (method string) {
 	method = "This is a placeholder for the publish function"
@@ -8,10 +13,20 @@ func publish() (method string) {
 	return
 }
 
-func deploy() (method string) {
-	method = "This is a placeholder for the deploy function"
-	fmt.Println(method)
-	return
+func deploy() {
+	binary, lookErr := exec.LookPath("kubectl")
+	if lookErr != nil {
+		panic(lookErr)
+	}
+
+	timeout := "10s"
+	args := []string{"kubectl", "get", "pods", "--namespace=kube-system", "--request-timeout=" + timeout}
+	env := os.Environ()
+
+	execErr := syscall.Exec(binary, args, env)
+	if execErr != nil {
+		panic(execErr)
+	}
 }
 
 func debug() (message string) {
@@ -28,14 +43,15 @@ func debug() (message string) {
 	return
 }
 
-func context(inputstring string) {
+func context(inputstring string) (outputstring string) {
 	if inputstring == "" {
 		context := "kube"
-		fmt.Printf("The current context is %q \n", context)
+		outputstring = "The current context is " + context
 	} else {
 		context := inputstring
-		fmt.Printf("The current context is %q \n", context)
+		outputstring = "The current context is " + context
 	}
+	return
 }
 
 func vertical(inputstring string) {
