@@ -67,45 +67,44 @@ func pdeploy() {
 	}
 	app.Copyright = "(c) 2017 Abdul Rehman"
 
+	var namespace string
+	var sleep string
+	var phold string
+	var environment string
+	var context string
+
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
-			Name:  "sleep",
-			Value: "15",
-			Usage: "Specifies sleep duration",
+			Name:        "sleep",
+			Value:       "15",
+			Usage:       "Specifies sleep duration",
+			Destination: &sleep,
 		},
 		cli.StringFlag{
-			Name:  "phold",
-			Value: "5",
-			Usage: "Specifies phold duration",
+			Name:        "phold",
+			Value:       "5",
+			Usage:       "Specifies phold duration",
+			Destination: &phold,
 		},
 		cli.StringFlag{
-			Name:  "namespace",
-			Value: "system",
-			Usage: "Kube namespace",
+			Name:        "namespace",
+			Value:       "system",
+			Usage:       "Kube namespace",
+			Destination: &namespace,
 		},
 		cli.StringFlag{
-			Name:  "environment",
-			Value: "autosit",
-			Usage: "Specifies environment",
+			Name:        "environment",
+			Value:       "autosit",
+			Usage:       "Specifies environment",
+			Destination: &environment,
 		},
 		cli.StringFlag{
-			Name:  "context",
-			Value: "ipt-context",
-			Usage: "Specifies context",
+			Name:        "context",
+			Value:       "ipt-context",
+			Usage:       "Specifies context",
+			Destination: &context,
 		},
 	}
-
-	// if c.Args().Get(0)) == 0 {
-	// 	app.Action = func(c *cli.Context) error {
-	// 		sleeptime := c.Args().Get(0)
-	// 		fmt.Println("Sleep duration is", sleeptime)
-	// 		return
-	// 	}
-	// } else {
-	// 	sleeptime := c.Args().Get(0)
-	// 	fmt.Println("Sleep duration is ", sleeptime)
-	// 	return
-	// }
 
 	app.Commands = []cli.Command{
 		{
