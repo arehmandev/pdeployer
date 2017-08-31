@@ -54,12 +54,13 @@ func context(inputstring string) (outputstring string) {
 	return
 }
 
-func vertical(inputstring string) {
+func vertical(inputstring string) (outputstring string) {
 	if inputstring == "false" {
 		vertical := "false"
-		fmt.Printf("The vertical is set to %q \n", vertical)
+		outputstring = "vertical is set to " + vertical
 	} else {
 		vertical := "true"
-		fmt.Printf("The vertical is set to %q \n", vertical)
+		outputstring = "vertical is set to " + vertical
 	}
+	return
 }

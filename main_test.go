@@ -116,3 +116,52 @@ func TestKubecontext(t *testing.T) {
 		})
 	}
 }
+
+func TestKubevertical(t *testing.T) {
+	cases := []struct {
+		name  string
+		input string
+		want  string
+	}{
+		{
+			name:  "Kube vertical true flag test",
+			input: "true",
+			want:  "vertical is set to true",
+		},
+		{
+			name:  "Kube vertical false flag test",
+			input: "false",
+			want:  "vertical is set to false",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			got := vertical(c.input)
+			if !reflect.DeepEqual(got, c.want) {
+				t.Errorf("got: %#v\nwant: %#v\n", got, c.want)
+			}
+		})
+	}
+}
+
+func TestKubepublish(t *testing.T) {
+	cases := []struct {
+		name string
+		want string
+	}{
+		{
+			name: "Kube publish test",
+			want: "This is a placeholder for the publish function",
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			got := publish()
+			if !reflect.DeepEqual(got, c.want) {
+				t.Errorf("got: %#v\nwant: %#v\n", got, c.want)
+			}
+		})
+	}
+}
