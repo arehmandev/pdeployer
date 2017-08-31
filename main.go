@@ -29,8 +29,11 @@ var (
 	kubeDOMAIN          string
 	kubeENVIRONMENT     string
 	typecores           = runtime.NumCPU()
-	cmdSLEEPS           = 30
-	cmdSLEEPSspec       = true
+	CMDnamespaceflag    = ""
+	CMDsleepflag        = ""
+	CMDpholdflag        = ""
+	CMDenvironmentflag  = ""
+	CMDcontextflag      = ""
 	optionalDeploy      = ""
 	optionalPublish     = ""
 	optionalContext     = ""
@@ -67,42 +70,36 @@ func pdeploy() {
 	}
 	app.Copyright = "(c) 2017 Abdul Rehman"
 
-	var namespace string
-	var sleep string
-	var phold string
-	var environment string
-	var context string
-
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:        "sleep",
 			Value:       "15",
 			Usage:       "Specifies sleep duration",
-			Destination: &sleep,
+			Destination: &CMDsleepflag,
 		},
 		cli.StringFlag{
 			Name:        "phold",
 			Value:       "5",
 			Usage:       "Specifies phold duration",
-			Destination: &phold,
+			Destination: &CMDpholdflag,
 		},
 		cli.StringFlag{
 			Name:        "namespace",
 			Value:       "system",
 			Usage:       "Kube namespace",
-			Destination: &namespace,
+			Destination: &CMDnamespaceflag,
 		},
 		cli.StringFlag{
 			Name:        "environment",
 			Value:       "autosit",
 			Usage:       "Specifies environment",
-			Destination: &environment,
+			Destination: &CMDenvironmentflag,
 		},
 		cli.StringFlag{
 			Name:        "context",
 			Value:       "ipt-context",
 			Usage:       "Specifies context",
-			Destination: &context,
+			Destination: &CMDcontextflag,
 		},
 	}
 
