@@ -13,20 +13,32 @@ func publish() (method string) {
 	return
 }
 
-func deploy() {
+func deploy() (test *kubePARAMETERS) {
+	kubestruct := new(kubePARAMETERS)
+	kubestruct.kubedir = cwDIR
+	kubestruct.namespace = kubeprune("namespace")
+	kubestruct.context = kubeprune("context")
+	kubestruct.environment = kubeprune("environment")
+	kubestruct.rt = kubeprune("rt")
+	kubestruct.domain = kubeprune("domain")
+
+	// fmt.Println("Full struct of parse json:", kubestruct)
+
 	binary, lookErr := exec.LookPath("kubectl")
 	if lookErr != nil {
 		panic(lookErr)
 	}
 
 	timeout := "10s"
-	args := []string{"kubectl", "get", "pods", "--namespace=kube-system", "--request-timeout=" + timeout}
+	args := []string{"kubectl", "get", "pods", "--namespace=" + kubestruct.namespace, "--request-timeout=" + timeout}
 	env := os.Environ()
 
 	execErr := syscall.Exec(binary, args, env)
 	if execErr != nil {
 		panic(execErr)
 	}
+
+	return kubestruct
 }
 
 func debug() (message string) {

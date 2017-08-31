@@ -3,7 +3,6 @@ package main
 import (
 	"os"
 	"runtime"
-	"sort"
 	"time"
 
 	"github.com/urfave/cli"
@@ -40,6 +39,15 @@ var (
 	cmdDELAY            = 1
 	cwDIR, cwDIRerr     = os.Getwd()
 )
+
+type kubePARAMETERS struct {
+	kubedir     string
+	namespace   string
+	context     string
+	environment string
+	rt          string
+	domain      string
+}
 
 func main() {
 	dependencies()
@@ -101,27 +109,27 @@ func pdeploy() {
 
 	app.Commands = []cli.Command{
 		{
-			Name:    "publish",
-			Aliases: []string{"p"},
-			Usage:   "(Optional) - Publishes the deployment",
-			Action: func(publishcli *cli.Context) error {
-				publish()
-				return nil
-			},
-		},
-		{
 			Name:    "deploy",
 			Aliases: []string{"dep"},
-			Usage:   "(Optional) - Triggers the deployment",
+			Usage:   "Triggers the deployment",
 			Action: func(deploycli *cli.Context) error {
 				deploy()
 				return nil
 			},
 		},
 		{
+			Name:    "publish",
+			Aliases: []string{"p"},
+			Usage:   "Publishes the deployment",
+			Action: func(publishcli *cli.Context) error {
+				publish()
+				return nil
+			},
+		},
+		{
 			Name:    "debug",
 			Aliases: []string{"deb"},
-			Usage:   "(Optional) - Debugs the deployment",
+			Usage:   "Debugs the deployment",
 			Action: func(debugcli *cli.Context) error {
 				debug()
 				return nil
@@ -129,8 +137,8 @@ func pdeploy() {
 		},
 	}
 
-	sort.Sort(cli.FlagsByName(app.Flags))
-	sort.Sort(cli.CommandsByName(app.Commands))
+	// sort.Sort(cli.FlagsByName(app.Flags))
+	// sort.Sort(cli.CommandsByName(app.Commands))
 
 	app.Run(os.Args)
 

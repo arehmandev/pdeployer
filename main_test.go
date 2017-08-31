@@ -40,7 +40,7 @@ func TestKubePrune(t *testing.T) {
 		{
 			name:  "Kube Context",
 			input: "namespace",
-			want:  "manualsit1",
+			want:  "kube-system",
 		},
 		{
 			name:  "Kube rt",
@@ -165,3 +165,24 @@ func TestKubepublish(t *testing.T) {
 		})
 	}
 }
+
+// func TestKubedeploy(t *testing.T) {
+// 	cases := []struct {
+// 		name string
+// 		want string
+// 	}{
+// 		{
+// 			name: "Kube deploy test",
+// 			want: "",
+// 		},
+// 	}
+//
+// 	for _, c := range cases {
+// 		t.Run(c.name, func(t *testing.T) {
+// 			got := deploy().kubedir
+// 			if !reflect.DeepEqual(got, c.want) {
+// 				t.Errorf("got: %#v\nwant: %#v\n", got, c.want)
+// 			}
+// 		})
+// 	}
+// }
