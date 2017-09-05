@@ -29,11 +29,12 @@ var (
 	kubeDOMAIN          string
 	kubeENVIRONMENT     string
 	typecores           = runtime.NumCPU()
-	CMDnamespaceflag    = ""
-	CMDsleepflag        = ""
-	CMDpholdflag        = ""
-	CMDenvironmentflag  = ""
-	CMDcontextflag      = ""
+	cmdNamespaceflag    = ""
+	cmdSleepflag        = ""
+	cmdPholdflag        = ""
+	cmdEnvironmentflag  = ""
+	cmdContextflag      = ""
+	cmdAppdir           = ""
 	optionalDeploy      = ""
 	optionalPublish     = ""
 	optionalContext     = ""
@@ -75,31 +76,37 @@ func pdeploy() {
 			Name:        "sleep",
 			Value:       "15",
 			Usage:       "Specifies sleep duration",
-			Destination: &CMDsleepflag,
+			Destination: &cmdSleepflag,
 		},
 		cli.StringFlag{
 			Name:        "phold",
 			Value:       "5",
 			Usage:       "Specifies phold duration",
-			Destination: &CMDpholdflag,
+			Destination: &cmdPholdflag,
 		},
 		cli.StringFlag{
 			Name:        "namespace",
 			Value:       "system",
 			Usage:       "Kube namespace",
-			Destination: &CMDnamespaceflag,
+			Destination: &cmdNamespaceflag,
 		},
 		cli.StringFlag{
 			Name:        "environment",
 			Value:       "autosit",
 			Usage:       "Specifies environment",
-			Destination: &CMDenvironmentflag,
+			Destination: &cmdEnvironmentflag,
 		},
 		cli.StringFlag{
 			Name:        "context",
 			Value:       "ipt-context",
 			Usage:       "Specifies context",
-			Destination: &CMDcontextflag,
+			Destination: &cmdContextflag,
+		},
+		cli.StringFlag{
+			Name:        "app_dir",
+			Value:       "applications",
+			Usage:       "Directory to point kubectl apply",
+			Destination: &cmdAppdir,
 		},
 	}
 
@@ -110,6 +117,15 @@ func pdeploy() {
 			Usage:   "Triggers the deployment",
 			Action: func(deploycli *cli.Context) error {
 				deploy()
+				return nil
+			},
+		},
+		{
+			Name:    "delete",
+			Aliases: []string{"del"},
+			Usage:   "Triggers the deployment",
+			Action: func(deploycli *cli.Context) error {
+				delete()
 				return nil
 			},
 		},
