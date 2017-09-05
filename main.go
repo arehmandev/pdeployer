@@ -77,36 +77,42 @@ func pdeploy() {
 			Value:       "15",
 			Usage:       "Specifies sleep duration",
 			Destination: &cmdSleepflag,
+			EnvVar:      "PDEPLOY_SLEEP",
 		},
 		cli.StringFlag{
 			Name:        "phold",
 			Value:       "5",
 			Usage:       "Specifies phold duration",
 			Destination: &cmdPholdflag,
+			EnvVar:      "PDEPLOY_PHOLD",
 		},
 		cli.StringFlag{
 			Name:        "namespace",
 			Value:       "system",
 			Usage:       "Kube namespace",
 			Destination: &cmdNamespaceflag,
+			EnvVar:      "PDEPLOY_NAMESPACE",
 		},
 		cli.StringFlag{
 			Name:        "environment",
 			Value:       "autosit",
 			Usage:       "Specifies environment",
 			Destination: &cmdEnvironmentflag,
+			EnvVar:      "PDEPLOY_ENVIRONMENT",
 		},
 		cli.StringFlag{
 			Name:        "context",
 			Value:       "ipt-context",
 			Usage:       "Specifies context",
 			Destination: &cmdContextflag,
+			EnvVar:      "PDEPLOY_CONTEXT",
 		},
 		cli.StringFlag{
 			Name:        "app_dir",
 			Value:       "applications",
 			Usage:       "Directory to point kubectl apply",
 			Destination: &cmdAppdir,
+			EnvVar:      "PDEPLOY_APP_DIR",
 		},
 	}
 

@@ -35,12 +35,12 @@ func TestKubePrune(t *testing.T) {
 		{
 			name:  "Kube Namespace",
 			input: "context",
-			want:  "np",
+			want:  "minikube",
 		},
 		{
 			name:  "Kube Context",
 			input: "namespace",
-			want:  "kube-system",
+			want:  "polyshop",
 		},
 		{
 			name:  "Kube rt",
