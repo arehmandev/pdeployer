@@ -25,12 +25,24 @@ func kubeprune(kubestring string) (kubereturn string) {
 		kubereturn := gjson.Get(templateJSONdata, "domain")
 		return kubereturn.String()
 	case kubestring == "namespace":
+		if cmdNamespaceflag != "" {
+			kubereturn := cmdNamespaceflag
+			return kubereturn
+		}
 		kubereturn := gjson.Get(templateJSONdata, "namespace")
 		return kubereturn.String()
 	case kubestring == "context":
+		if cmdContextflag != "" {
+			kubereturn := cmdContextflag
+			return kubereturn
+		}
 		kubereturn := gjson.Get(templateJSONdata, "context")
 		return kubereturn.String()
 	case kubestring == "environment":
+		if cmdEnvironmentflag != "" {
+			kubereturn := cmdEnvironmentflag
+			return kubereturn
+		}
 		environment := gjson.Get(templateJSONdata, "environment").String()
 		return environment
 	case kubestring == "environmentBranchOverride":
