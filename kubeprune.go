@@ -26,11 +26,9 @@ func kubeprune(kubestring string) (kubereturn string) {
 		return kubereturn.String()
 	case kubestring == "namespace":
 		kubereturn := gjson.Get(templateJSONdata, "namespace")
-		fmt.Println(kubereturn)
 		return kubereturn.String()
 	case kubestring == "context":
 		kubereturn := gjson.Get(templateJSONdata, "context")
-		fmt.Println(kubereturn)
 		return kubereturn.String()
 	case kubestring == "environment":
 		environment := gjson.Get(templateJSONdata, "environment").String()
