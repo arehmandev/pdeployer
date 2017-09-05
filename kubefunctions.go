@@ -73,13 +73,16 @@ func debug() (message string) {
 	message = "pdeploy is currently using these settings"
 	kubepruneVALUES := []string{"rt", "domain", "namespace", "context", "environment", "environmentBranchOverride", "globalBranchOverride", "deploy", "exclude", cmdAppdir}
 
-	fmt.Println(kubepruneVALUES[9])
 	// for index := range kubepruneVALUES;  < kubepruneVALUES; ++ {
 	//
 	// }
 	// kubeprune("deploy")
 
 	fmt.Println(message)
+	for index := 0; index < 9; index++ {
+		fmt.Println(kubepruneVALUES[index], "=", kubeprune(kubepruneVALUES[index]))
+	}
+
 	return
 }
 
