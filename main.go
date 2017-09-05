@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"runtime"
 	"time"
@@ -123,6 +124,9 @@ func pdeploy() {
 			Usage:   "Triggers the deployment",
 			Action: func(deploycli *cli.Context) error {
 				deploy()
+				fmt.Println("Waiting for delay to end:", &cmdSleepflag, "seconds")
+				sleeptime := new(time.Duration)
+				time.Sleep(*sleeptime)
 				return nil
 			},
 		},
@@ -150,6 +154,15 @@ func pdeploy() {
 			Usage:   "Debugs the deployment",
 			Action: func(debugcli *cli.Context) error {
 				debug()
+				return nil
+			},
+		},
+		{
+			Name:    "status",
+			Aliases: []string{"sta"},
+			Usage:   "Shows the status of the deployment",
+			Action: func(debugcli *cli.Context) error {
+				status()
 				return nil
 			},
 		},

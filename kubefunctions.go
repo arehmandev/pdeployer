@@ -29,8 +29,7 @@ func deploy() (test *kubePARAMETERS) {
 		panic(lookErr)
 	}
 
-	timeout := "10s"
-	args := []string{"kubectl", "apply", "-f", "applications", "--namespace=" + kubestruct.namespace, "--request-timeout=" + timeout, "--context=" + kubestruct.context}
+	args := []string{"kubectl", "apply", "-f", cmdAppdir, "--namespace=" + kubestruct.namespace, "--request-timeout=" + cmdPholdflag, "--context=" + kubestruct.context}
 	env := os.Environ()
 
 	execErr := syscall.Exec(binary, args, env)
@@ -57,8 +56,34 @@ func delete() (test *kubePARAMETERS) {
 		panic(lookErr)
 	}
 
-	timeout := "10s"
-	args := []string{"kubectl", "delete", "-f", "applications", "--namespace=" + kubestruct.namespace, "--request-timeout=" + timeout, "--context=" + kubestruct.context}
+	args := []string{"kubectl", "delete", "-f", cmdAppdir, "--namespace=" + kubestruct.namespace, "--request-timeout=" + cmdPholdflag, "--context=" + kubestruct.context}
+	env := os.Environ()
+
+	execErr := syscall.Exec(binary, args, env)
+	if execErr != nil {
+		panic(execErr)
+	}
+
+	return kubestruct
+}
+
+func status() (test *kubePARAMETERS) {
+	kubestruct := new(kubePARAMETERS)
+	kubestruct.kubedir = cwDIR
+	kubestruct.namespace = kubeprune("namespace")
+	kubestruct.context = kubeprune("context")
+	kubestruct.environment = kubeprune("environment")
+	kubestruct.rt = kubeprune("rt")
+	kubestruct.domain = kubeprune("domain")
+
+	// fmt.Println("Full struct of parse json:", kubestruct)
+
+	binary, lookErr := exec.LookPath("kubectl")
+	if lookErr != nil {
+		panic(lookErr)
+	}
+
+	args := []string{"kubectl", "get", "-f", cmdAppdir, "--namespace=" + kubestruct.namespace, "--request-timeout=" + cmdPholdflag, "--context=" + kubestruct.context}
 	env := os.Environ()
 
 	execErr := syscall.Exec(binary, args, env)
